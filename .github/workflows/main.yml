@@ -8,21 +8,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.12
-    - name: Install dependencies
-      run: |
-        make install
-    - name: Lint with pylint
-      run: |
-        make lint
-    - name: Test with pytest
-      run: |
-        make test
-    - name: Format code with python black
-      run: |
-        make format
-    
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.12
+
+      # Run make using the Makefile located in the specific path
+      - name: Run make with specific Makefile path
+        run: make -f 'Build an NLP in Cloud9 with Python/Makefile'
+
+      - name: Install dependencies
+        run: |
+          make -f 'Build an NLP in Cloud9 with Python/Makefile' install
+
+      - name: Lint with pylint
+        run: |
+          make -f 'Build an NLP in Cloud9 with Python/Makefile' lint
+
+      - name: Test with pytest
+        run: |
+          make -f 'Build an NLP in Cloud9 with Python/Makefile' test
+
+      - name: Format code with python black
+        run: |
+          make -f 'Build an NLP in Cloud9 with Python/Makefile' format
