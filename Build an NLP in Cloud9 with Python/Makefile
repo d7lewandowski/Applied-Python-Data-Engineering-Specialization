@@ -1,6 +1,6 @@
 install:
 		pip install	--upgrade pip && \
-			pip install -r requirements.txt
+			pip install -r '/workspaces/Applied-Python-Data-Engineering-Specialization/Build an NLP in Cloud9 with Python/requirements.txt'
 		python -m textblob.download_corpora
 
 test:
