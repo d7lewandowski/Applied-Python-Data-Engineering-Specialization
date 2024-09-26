@@ -6,3 +6,4 @@ fire
 pytest
 pytest-cov
 black
+pylint
