@@ -14,18 +14,15 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.12
-    # Run make using the Makefile located in the specific path
-    - name: Run make with specific Makefile path
-      run: make -f 'Build an NLP in Cloud9 with Python/Makefile'
     - name: Install dependencies
       run: |
-        make install -f 'Build an NLP in Cloud9 with Python/requirements.txt'
-    # - name: Lint with pylint
-    #   run: |
-    #     make lint
-    # - name: Test with pytest
-    #   run: |
-    #     make test
-    # - name: Format code with python black
-    #   run: |
-    #     make format
+        make install -f 'Build an NLP in Cloud9 with Python/Makefile'
+    - name: Lint with pylint
+      run: |
+        make lint -f 'Build an NLP in Cloud9 with Python/Makefile'
+    - name: Test with pytest
+      run: |
+        make test -f 'Build an NLP in Cloud9 with Python/Makefile'
+    - name: Format code
+      run: |
+        make format -f 'Build an NLP in Cloud9 with Python/Makefile'
