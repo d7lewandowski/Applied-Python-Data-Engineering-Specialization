@@ -101,4 +101,36 @@ def etl(filename):
     else:
         click.echo(click.style("Database created", fg="green"))
 
-print(etl("text.txt"))
+@cli.command("query")
+@click.option("--order_by", default="score", help = "order by score or keyword")
+@click.option("--limit", default=5, help = "limit the number of result")
+def query(order_by, limit):
+    """
+    Query the db and return keywords, hashtags and scores
+    example: python etl.py query
+    """
+
+    results = query_db(order_by, limit)
+    for result in results:
+        print(
+            click.style(result[0], fg="red"),
+            click.style(result[1], fg="green"),
+            click.style(result[2], fg="blue")
+        )
+@cli.command("delete")
+def delete():
+    """Delete the database 
+
+    Example: 
+    python etl.py delete
+    """
+    if path.exists(DATABASE):
+        path_to_db = path.abspath(DATABASE)
+        click.echo(click.style(f"Deleting database: {path_to_db}", fg='green'))
+        os.remove(DATABASE)
+    else:
+        click.echo(click.style(f"Database does not exists", fg='red'))
+
+if __name__ == "__main__":
+    cli()
+
