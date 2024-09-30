@@ -28,3 +28,54 @@ def make_hashtags(keywords):
     for keyword in keywords:
         hashtags.append("#" + keyword[0])
     return hashtags
+
+# create a function that make a limit for hashtags
+def limits_keywords(keywords, max):
+    keywords_limit = keywords[:max]
+    return keywords_limit
+
+
+@click.group()
+def cli():
+    """A cli for app"""
+
+@cli.command("extract")
+@click.argument("filename", default = "text.txt")
+def extract(filename):
+    """Extract keywords from file"""
+    text = read_file(filename)
+    keywords = extract_keywords(text)
+    click.echo(keywords)
+
+@cli.command("hashtags")
+@click.argument("filename", default = "text.txt")
+def hashtags(filename):
+    """Extract hashtags from file"""
+    text = read_file(filename)
+    keywords = extract_keywords(text)
+    hashtags = make_hashtags(keywords)
+    click.echo(hashtags)
+
+
+@cli.command("limits")
+@click.argument("filename", default="text.txt")
+@click.option('--max', '-l', default = 3)
+def limitscli(filename, max):
+    """Extract keywords from a file and make hashtags, limited by value"""
+    text = read_file(filename)
+    keywords = extract_keywords(text)
+    hashtags = make_hashtags(keywords)
+    limits = limits_keywords(hashtags, max)
+
+    click.echo(limits)
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    cli()
+
